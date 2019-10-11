@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/jdoiwork/try-elm-parcel/issues"
   },
-  "homepage": "https://github.com/jdoiwork/try-elm-parcel#readme"
+  "homepage": "https://github.com/jdoiwork/try-elm-parcel#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
 }
