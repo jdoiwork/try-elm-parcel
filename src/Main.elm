@@ -89,7 +89,7 @@ subscriptions model =
 
 view : Model -> Browser.Document Msg
 view model =
-  { title = "URL Interceptor"
+  { title = "Elm Parcel"
   , body =
     [ div [class "columns", class "is-gapless"]
       [ div (List.map class ["column", "is-one-quarter", "has-background-light", "is-narrow"])
