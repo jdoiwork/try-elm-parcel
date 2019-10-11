@@ -1,3 +1,5 @@
+port module Main exposing (main)
+
 -- Main.elm
 
 import Browser
@@ -8,11 +10,9 @@ import Url
 
 
 -- main =
---   h1 [] [ text "Hello, Elm!" ]
 
 
 -- MAIN
-
 
 main : Program () Model Msg
 main =
@@ -28,18 +28,21 @@ main =
 
 
 
+
+
 -- MODEL
 
 
 type alias Model =
   { key : Nav.Key
   , url : Url.Url
+  , timer : String
   }
 
 
 init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
 init flags url key =
-  ( Model key url, Cmd.none )
+  ( Model key url "", Cmd.none )
 
 
 -- UPDATE
@@ -48,6 +51,7 @@ init flags url key =
 type Msg
   = LinkClicked Browser.UrlRequest
   | UrlChanged Url.Url
+  | TimerRefreshed String
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -65,15 +69,18 @@ update msg model =
       ( { model | url = url }
       , Cmd.none
       )
+    TimerRefreshed s -> ( { model | timer = s }, Cmd.none)
 
 
 
 -- SUBSCRIPTIONS
 
+port refreshTimer : (String -> msg) -> Sub msg
 
 subscriptions : Model -> Sub Msg
-subscriptions _ =
-  Sub.none
+subscriptions model =
+  Sub.batch [ refreshTimer TimerRefreshed
+  ]
 
 
 -- VIEW
@@ -92,6 +99,7 @@ view model =
           , viewLink "/reviews/public-opinion"
           , viewLink "/reviews/shah-of-shahs"
           ]
+      , p [] [ text model.timer ]
       ]
   }
 

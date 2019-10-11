@@ -1,5 +1,10 @@
 import { Elm } from './Main.elm'
 
-Elm.Main.init({
+const app = Elm.Main.init({
   node: document.querySelector('main')
 })
+
+//app.ports.timerRefreshed.send("abc")
+console.log(app)
+console.log(app.ports)
+app.ports.refreshTimer.send("hello")
