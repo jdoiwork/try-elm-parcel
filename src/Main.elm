@@ -91,8 +91,9 @@ view : Model -> Browser.Document Msg
 view model =
   { title = "URL Interceptor"
   , body =
-    [ div [class "columns"]
-      [ div [class "column", class "is-one-quarter"] [aside [class "menu"] [sideLinks model]]
+    [ div [class "columns", class "is-gapless"]
+      [ div (List.map class ["column", "is-one-quarter", "has-background-light", "is-narrow"])
+            [aside [class "menu"] [sideLinks model]]
     
       , div [class "column"] [mainView model]
       ]
@@ -101,14 +102,20 @@ view model =
 
 mainView : Model -> Html msg
 mainView model =
-  main_ []
-    [ p [] [ text "The current URL is: "
-           , b [] [ text (Url.toString model.url) ]
-           ]
-    , p [] [ text <| "[" ++ String.fromInt model.timerCount ++ "] "
-           , text model.timer
-           ]
+  main_ [class "hero", class "is-primary"]
+    [ div [class "hero-body"]
+      [div [class "container"]
+        [ h1 [class "title"] [ text "The current URL is: "]
+        , p [] [text (Url.toString model.url) ]
+        , h2 [class "subtitle"] [text "updating..."]
+        , p [] [ text <| "[" ++ String.fromInt model.timerCount ++ "] "
+               , text model.timer
+               ]
+        ]
+
+      ]
     ]
+
 sideLinks : Model -> Html msg
 sideLinks model =
   let vl = viewLink model
