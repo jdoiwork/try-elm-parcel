@@ -20,6 +20,9 @@
   },
   "homepage": "https://github.com/jdoiwork/try-elm-parcel#readme",
   "devDependencies": {
+    "elm": "^0.19.0-no-deps",
+    "elm-hot": "^1.1.2",
+    "node-elm-compiler": "^5.0.4",
     "parcel-bundler": "^1.12.4"
   }
 }
