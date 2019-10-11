@@ -91,21 +91,30 @@ view : Model -> Browser.Document Msg
 view model =
   { title = "URL Interceptor"
   , body =
-    [ aside [class "menu"] [sideLinks model]
+    [ div [class "columns"]
+      [ div [class "column", class "is-one-quarter"] [aside [class "menu"] [sideLinks model]]
     
-    , p [] [ text <| "[" ++ String.fromInt model.timerCount ++ "] "
-           , text model.timer ]
+      , div [class "column"] [mainView model]
+      ]
     ]
   }
 
+mainView : Model -> Html msg
+mainView model =
+  main_ []
+    [ p [] [ text "The current URL is: "
+           , b [] [ text (Url.toString model.url) ]
+           ]
+    , p [] [ text <| "[" ++ String.fromInt model.timerCount ++ "] "
+           , text model.timer
+           ]
+    ]
 sideLinks : Model -> Html msg
 sideLinks model =
   let vl = viewLink model
   in
     div []
-    [ text "The current URL is: "
-    , b [] [ text (Url.toString model.url) ]
-    , ul [class "menu-list"]
+    [ ul [class "menu-list"]
       [ vl "/home"
       , vl "/profile"
       , vl "/reviews/the-century-of-the-self"
