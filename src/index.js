@@ -1,5 +1,7 @@
 import { Elm } from './Main.elm'
 
+import dayjs from 'dayjs'
+
 const app = Elm.Main.init({
   node: document.querySelector('main')
 })
@@ -7,4 +9,11 @@ const app = Elm.Main.init({
 //app.ports.timerRefreshed.send("abc")
 console.log(app)
 console.log(app.ports)
-app.ports.refreshTimer.send("hello")
+
+function refreshTimer() {
+  app.ports.refreshTimer.send(dayjs(Date.now()).format('YYYY-MM-DD HH:mm:ss'))
+  window.setTimeout(refreshTimer, 1000 + Math.random() * 4000)
+}
+
+window.setTimeout(refreshTimer, 1000)
+

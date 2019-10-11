@@ -37,12 +37,13 @@ type alias Model =
   { key : Nav.Key
   , url : Url.Url
   , timer : String
+  , timerCount : Int
   }
 
 
 init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
 init flags url key =
-  ( Model key url "", Cmd.none )
+  ( Model key url "" 0, Cmd.none )
 
 
 -- UPDATE
@@ -69,7 +70,7 @@ update msg model =
       ( { model | url = url }
       , Cmd.none
       )
-    TimerRefreshed s -> ( { model | timer = s }, Cmd.none)
+    TimerRefreshed s -> ( { model | timer = s, timerCount = model.timerCount + 1 }, Cmd.none)
 
 
 
@@ -99,7 +100,8 @@ view model =
           , viewLink "/reviews/public-opinion"
           , viewLink "/reviews/shah-of-shahs"
           ]
-      , p [] [ text model.timer ]
+      , p [] [ text <| "[" ++ String.fromInt model.timerCount ++ "] "
+             , text model.timer ]
       ]
   }
 

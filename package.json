@@ -24,5 +24,8 @@
     "elm-hot": "^1.1.2",
     "node-elm-compiler": "^5.0.4",
     "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "dayjs": "^1.8.16"
   }
 }
