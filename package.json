@@ -1,0 +1,20 @@
+{
+  "name": "try-elm-parcel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jdoiwork/try-elm-parcel.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jdoiwork/try-elm-parcel/issues"
+  },
+  "homepage": "https://github.com/jdoiwork/try-elm-parcel#readme"
+}
