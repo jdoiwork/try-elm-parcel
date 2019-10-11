@@ -91,21 +91,35 @@ view : Model -> Browser.Document Msg
 view model =
   { title = "URL Interceptor"
   , body =
-      [ text "The current URL is: "
-      , b [] [ text (Url.toString model.url) ]
-      , ul []
-          [ viewLink "/home"
-          , viewLink "/profile"
-          , viewLink "/reviews/the-century-of-the-self"
-          , viewLink "/reviews/public-opinion"
-          , viewLink "/reviews/shah-of-shahs"
-          ]
-      , p [] [ text <| "[" ++ String.fromInt model.timerCount ++ "] "
-             , text model.timer ]
-      ]
+    [ aside [class "menu"] [sideLinks model]
+    
+    , p [] [ text <| "[" ++ String.fromInt model.timerCount ++ "] "
+           , text model.timer ]
+    ]
   }
 
+sideLinks : Model -> Html msg
+sideLinks model =
+  let vl = viewLink model
+  in
+    div []
+    [ text "The current URL is: "
+    , b [] [ text (Url.toString model.url) ]
+    , ul [class "menu-list"]
+      [ vl "/home"
+      , vl "/profile"
+      , vl "/reviews/the-century-of-the-self"
+      , vl "/reviews/public-opinion"
+      , vl "/reviews/shah-of-shahs"
+      ]
+    ]
 
-viewLink : String -> Html msg
-viewLink path =
-  li [] [ a [ href path ] [ text path ] ]
+viewLink : Model -> String -> Html msg
+viewLink model path =
+  let isActive =
+        if model.url.path == path
+        then [class "is-active"]
+        else []
+  in
+    li [] [ a ([ href path ] ++ isActive) [ text path ] ]
+  

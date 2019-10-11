@@ -1,6 +1,7 @@
 import { Elm } from './Main.elm'
 
 import dayjs from 'dayjs'
+import bulma from 'bulma'
 
 const app = Elm.Main.init({
   node: document.querySelector('main')
